@@ -52,6 +52,11 @@
     flex-direction: column;
 }
 
+.input-aside input {
+    width: 90%;
+    height: 100%;
+}
+
 .expense-input {
     display: flex;
     flex-direction: column;
@@ -80,6 +85,8 @@ label {
 }
 
 input {
+    /* width: 90%;
+    height: 100%; */
     padding: 8px;
 }
 

@@ -26,6 +26,7 @@ budgetButton.addEventListener("click", () => {
     }
     else {
         budgetDashboard.innerText = budgetValue.value;
+        budgetValue.value = ""
     }
     showBalance();
 })
