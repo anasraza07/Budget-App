@@ -9,11 +9,14 @@ const expenseCategory = document.getElementById("expense-category-value");
 const expenseDescription = document.getElementById("expense-description-value");
 const expenseAmount = document.getElementById("expense-amount-value");
 const expenseDate = document.getElementById("expense-date-value");
-const expenseButton = document.getElementById("expense-button");
+const expenseBtn = document.getElementById("expense-button");
 
 const table = document.getElementById("expense-table");
 const tbody = document.getElementById("table-tbody");
 
+let expenseList = []
+// displayExpense();
+// displayExpense();
 let totalExpense = 0;
 
 // Budget Dashboard
@@ -25,36 +28,6 @@ budgetButton.addEventListener("click", () => {
         budgetDashboard.innerText = budgetValue.value;
     }
     showBalance();
-})
-
-// Balance Dashboard
-const showBalance = () => {
-    // let balance = 0;
-    balanceDashboard.innerText = budgetDashboard.innerText - expenseDashboard.innerText;
-}
-
-// Taking input from user
-let expenseList = [];
-expenseButton.addEventListener("click", () => {
-    const categoryQuery = expenseCategory.value;
-    const descriptionQuery = expenseDescription.value;
-    const amountQuery = +expenseAmount.value;
-    const dateQuery = expenseDate.value;
-
-    let expenseObj = {
-        categoryQuery,
-        descriptionQuery,
-        amountQuery,
-        dateQuery
-    }
-    expenseList.push(expenseObj)
-
-    expenseCategory.value = "";
-    expenseDescription.value = "";
-    expenseAmount.value = "";
-    expenseDate.value = "";
-    displayExpense(expenseObj);
-    showExpense();
 })
 
 // Expense Dashboard
@@ -73,39 +46,106 @@ const showExpense = () => {
     }
 }
 
-// Displaying expenses
-const displayExpense = (expenseObj) => {
-    const tr = document.createElement("tr");
-    const td = document.createElement("td");
-    td.setAttribute("id", "firstData")
-    td.innerHTML = `<div class="m-0">${expenseObj.categoryQuery}</div>
-    <p class="m-0" id="date">${expenseObj.dateQuery}</p>`
-    tr.appendChild(td);
-
-    const td1 = document.createElement("td");
-    td1.innerHTML = `<div>$${expenseObj.amountQuery}</div>`
-    tr.appendChild(td1);
-
-    const td2 = document.createElement("td");
-    td2.innerHTML = `<button class="edit" id="edit-btn">Edit</button>
-    <button class="delete" id="delete-btn">Delete</button>`
-    tr.appendChild(td2);
-
-    tbody.appendChild(tr);
-    console.log(expenseList)
+// Balance Dashboard
+const showBalance = () => {
+    // let balance = 0;
+    balanceDashboard.innerText = budgetDashboard.innerText - expenseDashboard.innerText;
 }
 
+// Taking input from user
+// let expenseList = [];
+expenseBtn.addEventListener("click", () => {
+    const categoryQuery = expenseCategory.value;
+    const descriptionQuery = expenseDescription.value;
+    const amountQuery = +expenseAmount.value;
+    const dateQuery = expenseDate.value;
 
-//     document.getElementById("edit-btn").addEventListener("click", editButton)
+    let expenseObj = {
+        categoryQuery,
+        descriptionQuery,
+        amountQuery,
+        dateQuery,
+        // isEdit: false,
+        isDeleted: false
+    }
+    expenseList.push(expenseObj)
 
-// const editButton = (e, expenseList) => {
-//     // let elem = e.target.parentNode;
-//     const edit = (elem) => {
-//         console.log(expenseList);
-//     }
-//     edit()
+    displayExpense();
+    showExpense();
 
-//     // console.log(expenseList.indexOf(elem))
-// }
+    expenseCategory.value = "";
+    expenseDescription.value = "";
+    expenseAmount.value = "";
+    expenseDate.value = "";
+})
 
+// Displaying expenses
+// var currObj;
+function displayExpense() {
+    // console.log(expenseList)
+    let tbodyHtml = '';
+    expenseList.forEach((obj, index) => {
+        // console.log(obj.categoryVal  )
+        tbodyHtml += `
+        <tr>
+                <td>${index + 1}</td>
+                <td id="firstData">
+                    <div>${obj.categoryQuery}</div>
+                    <p>${obj.dateQuery}</p>
+                </td>
+                <td>${obj.amountQuery}</td>
+                <td><button class="edit btn" id="edit">Edit
+                </button>
+                                <button class="delete btn" id="delete">Delete</button>
+                </td>
+            </tr>
+        `
+        tbody.innerHTML = tbodyHtml;
+        document.querySelectorAll("#edit").forEach((n) => {
+            n.addEventListener('click', (event) => {
+                // console.log(event, index)
+                let storedCategory = event.target.parentNode.previousElementSibling.previousElementSibling.firstChild.nextSibling.innerText,
+                    storedAmount = event.target.parentNode.previousElementSibling.innerText,
+                    storedDate = event.target.parentNode.previousElementSibling.previousElementSibling.firstChild.nextSibling.nextSibling.nextSibling.innerText;
+
+                event.target.parentNode.parentNode.remove()
+                expenseList.splice(index)
+                expenseCategory.value = storedCategory;
+                expenseDescription.value = storedCategory;
+                expenseAmount.value = storedAmount;
+                expenseDate.value = storedDate;
+                displayExpense()
+                // console.log(index)
+            })
+
+            document.querySelectorAll("#delete").forEach((n) => {
+                n.addEventListener('click', (event) => {
+
+                    event.target.parentNode.parentNode.remove()
+                    expenseList.splice(index)
+                    displayExpense()
+                })
+            })
+            // console.log(expenseObj.categoryQuery)
+            //     const tr = document.createElement("tr");
+            //     const td = document.createElement("td");
+            //     td.setAttribute("id", "firstData")
+            //     td.innerHTML = `<div class="m-0">${obj.categoryQuery}</div>
+            // <p class="m-0" id="date">${obj.dateQuery}</p>`
+            //     tr.appendChild(td);
+
+            //     const td1 = document.createElement("td");
+            //     td1.innerHTML = `<div>$${obj.amountQuery}</div>`
+            //     tr.appendChild(td1);
+
+            //     const td2 = document.createElement("td");
+            //     td2.innerHTML = `<button class="edit" id="edit-btn">Edit</button>
+            // <button class="delete" id="delete-btn" onclick="deleteBtn(${obj.isDeleted})">Delete</button>`
+            //     tr.appendChild(td2);
+
+            //     tbody.appendChild(tr);
+        })
+    }
+    )
+}
 
