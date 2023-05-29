@@ -90,8 +90,8 @@ function displayExpense() {
         <tr>
                 <td>${index + 1}</td>
                 <td id="firstData">
-                    <div>${obj.categoryQuery}</div>
-                    <p>${obj.dateQuery}</p>
+                    <div class="m-0">${obj.categoryQuery}</div>
+                    <p class="m-0" id="date">${obj.dateQuery}</p>
                 </td>
                 <td>${obj.amountQuery}</td>
                 <td><button class="edit btn" id="edit">Edit
