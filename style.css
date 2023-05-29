@@ -143,9 +143,11 @@ td #date {
     .input-container {
         flex-wrap: wrap;
     }
-.inputs-aside{
-    justify-content: center;
-}
+
+    .inputs-aside {
+        justify-content: center;
+    }
+
     .table {
         font-size: .9rem;
     }
