@@ -12,50 +12,54 @@
 
 <body>
     <h1>Budget App</h1>
-    <div class="container" >
-        <div class="dashboard-container">
-            <div class="budget-value dashboard-box">
-                <p>Budget</p>
-                <p id="budget-amount">00</p>
-            </div>
-            <div class="expense-value dashboard-box">
-                <p>Expense</p>
-                <p id="expense-amount">00</p>
-            </div>
-            <div class="balance-value dashboard-box">
-                <p>Balance</p>
-                <p id="balance-amount">00</p>
-            </div>
-        </div>
+    <div class="container">
+        <!-- <div class="sticky-container"> -->
 
-        <div class="input-container">
-            <div class="budget-input input-box">
-                <label for="budget-value">Budget</label>
-                <input type="number" name="budget-value" id="budget-value" placeholder="Enter total amount">
-                <button class="button" id="budget-button">Set Budget</button>
-            </div>
-
-            <div class="expense-input input-box">
-                <div class="inputs-aside">
-                <div class="firstset">
-                    <label for="category">Category</label>
-                    <input type="text" name="category" id="expense-category-value" placeholder="Enter expense category">
-
-                    <label for="description">Description</label>
-                    <input type="text" name="description" id="expense-description-value"
-                        placeholder="Enter description">
+            <div class="dashboard-container">
+                <div class="budget-value dashboard-box">
+                    <p>Budget</p>
+                    <p id="budget-amount">00</p>
                 </div>
-                <div class="secondset">
-                    <label for="amount">Amount</label>
-                    <input type="number" name="amount" id="expense-amount-value" placeholder="Enter amount">
-
-                    <label for="date">Date</label>
-                    <input type="date" name="date" id="expense-date-value" placeholder="Enter date">
+                <div class="expense-value dashboard-box">
+                    <p>Expense</p>
+                    <p id="expense-amount">00</p>
+                </div>
+                <div class="balance-value dashboard-box">
+                    <p>Balance</p>
+                    <p id="balance-amount">00</p>
                 </div>
             </div>
-                <button class="button" id="expense-button">Set Expense</button>
+
+            <div class="input-container">
+                <div class="budget-input input-box">
+                    <label for="budget-value">Budget</label>
+                    <input type="number" name="budget-value" id="budget-value" placeholder="Enter total amount">
+                    <button class="button" id="budget-button">Set Budget</button>
+                </div>
+
+                <div class="expense-input input-box">
+                    <div class="inputs-aside">
+                        <div class="firstset">
+                            <label for="category">Category</label>
+                            <input type="text" name="category" id="expense-category-value"
+                                placeholder="Enter expense category">
+
+                            <label for="description">Description</label>
+                            <input type="text" name="description" id="expense-description-value"
+                                placeholder="Enter description">
+                        </div>
+                        <div class="secondset">
+                            <label for="amount">Amount</label>
+                            <input type="number" name="amount" id="expense-amount-value" placeholder="Enter amount">
+
+                            <label for="date">Date</label>
+                            <input type="date" name="date" id="expense-date-value" placeholder="Enter date">
+                        </div>
+                    </div>
+                    <button class="button" id="expense-button">Set Expense</button>
+                </div>
             </div>
-        </div>
+        <!-- </div> -->
         <div class="expense-table" id="expense-table">
             <table class="table ">
                 <thead id="table-thead">

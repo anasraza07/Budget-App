@@ -41,9 +41,9 @@ const showExpense = () => {
     }
     else {
         expenseDashboard.innerText = sum
-        showBalance();
         // console.log(sum)
     }
+    showBalance();
 }
 
 // Balance Dashboard
@@ -101,51 +101,71 @@ function displayExpense() {
             </tr>
         `
         tbody.innerHTML = tbodyHtml;
-        document.querySelectorAll("#edit").forEach((n) => {
-            n.addEventListener('click', (event) => {
-                // console.log(event, index)
-                let storedCategory = event.target.parentNode.previousElementSibling.previousElementSibling.firstChild.nextSibling.innerText,
-                    storedAmount = event.target.parentNode.previousElementSibling.innerText,
-                    storedDate = event.target.parentNode.previousElementSibling.previousElementSibling.firstChild.nextSibling.nextSibling.nextSibling.innerText;
+    })
 
-                event.target.parentNode.parentNode.remove()
-                expenseList.splice(index)
-                expenseCategory.value = storedCategory;
-                expenseDescription.value = storedCategory;
-                expenseAmount.value = storedAmount;
-                expenseDate.value = storedDate;
-                displayExpense()
-                // console.log(index)
-            })
 
-            document.querySelectorAll("#delete").forEach((n) => {
-                n.addEventListener('click', (event) => {
+    // const editAndDelBtn = () => {
+    document.querySelectorAll("#edit").forEach((n) => {
+        n.addEventListener('click', (event) => {
+            // console.log(event, index)
+            let storedCategory = event.target.parentNode.previousElementSibling.previousElementSibling.firstChild.nextSibling.innerText,
+                storedAmount = event.target.parentNode.previousElementSibling.innerText,
+                storedDate = event.target.parentNode.previousElementSibling.previousElementSibling.firstChild.nextSibling.nextSibling.nextSibling.innerText;
 
-                    event.target.parentNode.parentNode.remove()
-                    expenseList.splice(index)
-                    displayExpense()
-                })
-            })
-            // console.log(expenseObj.categoryQuery)
-            //     const tr = document.createElement("tr");
-            //     const td = document.createElement("td");
-            //     td.setAttribute("id", "firstData")
-            //     td.innerHTML = `<div class="m-0">${obj.categoryQuery}</div>
-            // <p class="m-0" id="date">${obj.dateQuery}</p>`
-            //     tr.appendChild(td);
-
-            //     const td1 = document.createElement("td");
-            //     td1.innerHTML = `<div>$${obj.amountQuery}</div>`
-            //     tr.appendChild(td1);
-
-            //     const td2 = document.createElement("td");
-            //     td2.innerHTML = `<button class="edit" id="edit-btn">Edit</button>
-            // <button class="delete" id="delete-btn" onclick="deleteBtn(${obj.isDeleted})">Delete</button>`
-            //     tr.appendChild(td2);
-
-            //     tbody.appendChild(tr);
+            expenseCategory.value = storedCategory;
+            expenseDescription.value = storedCategory;
+            expenseAmount.value = storedAmount;
+            expenseDate.value = storedDate;
+            // filterEdited(event.target);
+            let indexOfCurrObj = event.target.parentNode.previousElementSibling.previousElementSibling.previousElementSibling.innerText - 1
+            event.target.parentNode.parentNode.remove()
+            expenseList.splice(indexOfCurrObj, 1);
+            displayExpense()
+            // expenseList.splice(index)
+            // console.log(index)
         })
-    }
-    )
+    })
+
+    document.querySelectorAll("#delete").forEach((n) => {
+        n.addEventListener('click', (event) => {
+
+            let indexOfCurrObj = event.target.parentNode.previousElementSibling.previousElementSibling.previousElementSibling.innerText - 1
+            event.target.parentNode.parentNode.remove()
+            expenseList.splice(indexOfCurrObj, 1);
+            // console.log(indexOfCurrDelObj)
+
+            displayExpense()
+            showExpense();
+
+            // expenseList.splice(index)
+        })
+    })
 }
+
+// }
+        // console.log(expenseObj.categoryQuery)
+        //     const tr = document.createElement("tr");
+        //     const td = document.createElement("td");
+        //     td.setAttribute("id", "firstData")
+        //     td.innerHTML = `<div class="m-0">${obj.categoryQuery}</div>
+        // <p class="m-0" id="date">${obj.dateQuery}</p>`
+        //     tr.appendChild(td);
+
+        //     const td1 = document.createElement("td");
+        //     td1.innerHTML = `<div>$${obj.amountQuery}</div>`
+        //     tr.appendChild(td1);
+
+        //     const td2 = document.createElement("td");
+        //     td2.innerHTML = `<button class="edit" id="edit-btn">Edit</button>
+        // <button class="delete" id="delete-btn" onclick="deleteBtn(${obj.isDeleted})">Delete</button>`
+        //     tr.appendChild(td2);
+
+        //     tbody.appendChild(tr);
+    // })
+//     }
+//     )
+// }
+// const filterEdited = (a) => {
+//     console.log(a)
+// }
 

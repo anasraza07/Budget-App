@@ -11,6 +11,11 @@
     align-items: center;
 }
 
+/* .sticky-container{
+    position: sticky;
+    top: 20px;
+} */
+
 .dashboard-container {
     border: 2px solid black;
     background-color: rgba(0, 0, 0, 0.871);
@@ -79,40 +84,46 @@ input {
 }
 
 .expense-table {
-    /* width: 90%; */
+    width: 90%;
     /* border: 2px solid grey; */
     margin: 34px auto;
 }
 
 .table {
-    /* width: 70%; */
+    /* width: 80%; */
+    border: 2px solid grey;
+    width: 100%;
     border-collapse: collapse;
     margin: auto;
 }
 
 tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #d8d5d5a3;
 }
 
 td {
     /* padding: 12px; */
-    border-bottom: 1px solid grey;
+    /* border-bottom: 1px solid grey; */
+    text-align: center;
+    height: 30px;
+    /* width: 50px; */
+    padding: 8px;
 }
 
-td {
-    text-align: center;
-}
+/* td {
+} */
 
 #firstData {
     text-align: left;
 
 }
-td #date{
+
+td #date {
     color: gray;
     font-size: .9rem;
 }
 
-.m-0{
+.m-0 {
     margin: 0px;
 }
 
