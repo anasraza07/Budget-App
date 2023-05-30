@@ -66,8 +66,6 @@ expenseBtn.addEventListener("click", () => {
         descriptionQuery,
         amountQuery,
         dateQuery,
-        // isEdit: false,
-        isDeleted: false
     }
     expenseList.push(expenseObj)
 
@@ -78,8 +76,8 @@ expenseBtn.addEventListener("click", () => {
     expenseDescription.value = "";
     expenseAmount.value = "";
     expenseDate.value = "";
+    // console.log(expenseObj.dateQuery);
 })
-
 // Displaying expenses
 // var currObj;
 function displayExpense() {
@@ -90,14 +88,13 @@ function displayExpense() {
         tbodyHtml += `
         <tr>
                 <td>${index + 1}</td>
-                <td id="firstData">
+                <td class="firstData">
                     <div class="m-0">${obj.categoryQuery}</div>
                     <p class="m-0" id="date">${obj.dateQuery}</p>
                 </td>
                 <td>${obj.amountQuery}</td>
-                <td><button class="edit btn" id="edit">Edit
-                </button>
-                                <button class="delete btn" id="delete">Delete</button>
+                <td><img id="edit" class="actionsImg"src="./img/edit.png">
+                                <img id="delete" class="actionsImg"src="./img/delete.png">
                 </td>
             </tr>
         `
