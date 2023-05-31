@@ -175,9 +175,10 @@ td #date {
         justify-content: center;
     }
 
-    /* .expense-table {
-        margin: 34px 0;
-    } */
+    .expense-table {
+        /* margin: 34px 0; */
+        width: 100%;
+    }
 
     .table {
         font-size: .9rem;
@@ -187,10 +188,12 @@ td #date {
         font-size: .8rem;
         margin: 0;
     }
+
     th,
     td {
-        padding: 4px;
+        padding: 3px;
     }
+
     .actionsImg {
         width: 12px;
     }

@@ -12,6 +12,7 @@ const expenseDate = document.getElementById("expense-date-value");
 const expenseBtn = document.getElementById("expense-button");
 
 const table = document.getElementById("expense-table");
+const thead = document.getElementById("table-thead");
 const tbody = document.getElementById("table-tbody");
 
 let expenseList = []
@@ -81,6 +82,14 @@ expenseBtn.addEventListener("click", () => {
 // Displaying expenses
 // var currObj;
 function displayExpense() {
+    thead.innerHTML = `
+    <tr>
+        <th>S.no.</th>
+        <th class="firstData">Category/Description</th>
+        <th>Amount</th>
+        <th>Buttons</th>
+    </tr>`;
+    
     // console.log(expenseList)
     let tbodyHtml = '';
     expenseList.forEach((obj, index) => {
@@ -98,6 +107,7 @@ function displayExpense() {
                 </td>
             </tr>
         `
+
         tbody.innerHTML = tbodyHtml;
     })
 
