@@ -15,6 +15,9 @@ const table = document.getElementById("expense-table");
 const thead = document.getElementById("table-thead");
 const tbody = document.getElementById("table-tbody");
 
+const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
 let expenseList = []
 // displayExpense();
 // displayExpense();
@@ -62,22 +65,33 @@ expenseBtn.addEventListener("click", () => {
     const amountQuery = +expenseAmount.value;
     const dateQuery = expenseDate.value;
 
-    let expenseObj = {
-        categoryQuery,
-        descriptionQuery,
-        amountQuery,
-        dateQuery,
+    const dayOnly = days[new Date(`"${dateQuery}"`).getDay()];
+    const monthOnly = months[new Date(`"${dateQuery}"`).getMonth()];
+    const dateOnly = new Date(`"${dateQuery}"`).getDate();
+    if (categoryQuery === "" || descriptionQuery === "" || amountQuery === "" || dateQuery === "") {
+        alert("Please Enter all Values")
     }
-    expenseList.push(expenseObj)
+    else {
 
-    displayExpense();
-    showExpense();
+        // console.log(dayOnly, monthOnly, dateOnly)
 
-    expenseCategory.value = "";
-    expenseDescription.value = "";
-    expenseAmount.value = "";
-    expenseDate.value = "";
-    // console.log(expenseObj.dateQuery);
+        let expenseObj = {
+            categoryQuery,
+            descriptionQuery,
+            amountQuery,
+            dateQuery: `${dayOnly}, ${monthOnly} ${dateOnly}`
+        }
+        expenseList.push(expenseObj)
+
+        displayExpense();
+        showExpense();
+
+        expenseCategory.value = "";
+        expenseDescription.value = "";
+        expenseAmount.value = "";
+        expenseDate.value = "";
+        // console.log(expenseObj.dateQuery);
+    }
 })
 // Displaying expenses
 // var currObj;
@@ -85,18 +99,18 @@ function displayExpense() {
     thead.innerHTML = `
     <tr>
         <th>S.no.</th>
-        <th class="firstData">Category/Description</th>
+        <th class="firstData">Description</th>
         <th>Amount</th>
         <th>Buttons</th>
     </tr>`;
-    
+
     // console.log(expenseList)
     let tbodyHtml = '';
     expenseList.forEach((obj, index) => {
         // console.log(obj.categoryVal  )
         tbodyHtml += `
         <tr>
-                <td>${index + 1}</td>
+                <td>${index + 1}.</td>
                 <td class="firstData">
                     <div class="m-0">${obj.categoryQuery}</div>
                     <p class="m-0" id="date">${obj.dateQuery}</p>
@@ -144,6 +158,9 @@ function displayExpense() {
 
             displayExpense()
             showExpense();
+            if (expenseList.length === 0) {
+                thead.innerHTML = "";
+            }
 
             // expenseList.splice(index)
         })

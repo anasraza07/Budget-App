@@ -117,7 +117,7 @@ input {
 
 th,
 tr:nth-child(even) {
-    background-color: #9cb4e0;
+    background-color: #9cb4e0bd;
 }
 
 th,
@@ -128,6 +128,7 @@ td {
     height: 30px;
     /* width: 50px; */
     padding: 8px;
+    vertical-align: middle;
 }
 
 /* td {
@@ -141,6 +142,7 @@ td {
 td #date {
     color: gray;
     font-size: .9rem;
+    padding: 0px;
 }
 
 .actionsImg {
@@ -159,6 +161,7 @@ td #date {
 
 .m-0 {
     margin: 0px;
+    padding: 0px;
 }
 
 
@@ -193,8 +196,10 @@ td #date {
     td {
         padding: 3px;
     }
-
+    td #date {
+        font-size: .8rem;
+    }
     .actionsImg {
-        width: 12px;
+        width: 15px;
     }
 }
