@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhai+2&family=Bree+Serif&family=IBM+Plex+Sans&display=swap');
+
+.m-0 {
+    margin: 0px;
+    padding: 0px;
+}
+
+.m-2 {
+    margin: 6px;
+}
+
+.baloo-bhai {
+    font-family: 'Baloo Bhai 2', cursive;
+}
+.center{
+    text-align: center;
+}

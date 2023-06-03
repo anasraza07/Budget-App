@@ -1,0 +1,87 @@
+@media screen and (max-width: 500px) {
+    .dashboard-container {
+        font-size: 1.1rem;
+        margin: 10px auto;
+        padding: 6px 0px;
+
+    }
+
+    label {
+        margin: 4px 0
+    }
+
+    .expense-input select,
+    input {
+        margin-bottom: 2px;
+    }
+
+    .input-box {
+        margin: 0;
+        padding: 2px;
+    }
+
+    .input-container {
+        flex-wrap: wrap;
+    }
+
+    .inputs-aside {
+        justify-content: center;
+    }
+
+    .expense-input {
+        margin: 15px 0;
+    }
+
+    .expense-table {
+        width: 100%;
+    }
+
+    .table {
+        font-size: .9rem;
+    }
+
+    tr {
+        height: 20px;
+    }
+
+    th {
+        font-size: .9rem;
+        text-align: center;
+        padding: 8px 5px;
+        vertical-align: middle;
+
+    }
+
+    th,
+    td {
+        padding: 5px 0px;
+    }
+
+    td {
+        height: 30px;
+        font-size: .8rem;
+
+    }
+
+    .btn {
+        font-size: 1rem;
+        /* margin: 0; */
+    }
+
+    th,
+    td {
+        padding: 5px 0px;
+    }
+
+    td #date {
+        font-size: .8rem;
+    }
+
+    .firstData {
+        padding: 8px 3px;
+    }
+
+    .actionsImg {
+        width: 15px;
+    }
+}

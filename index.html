@@ -6,61 +6,74 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Budget App</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./CSS/style.css">
+    <link rel="stylesheet" href="./CSS/utilities.css">
+    <link rel="stylesheet" href="./CSS/phone.css">
     <script defer src="app.js"></script>
 </head>
 
 <body>
-    <h1>Budget App</h1>
+    <h1 class="m-2 baloo-bhai">Budget App</h1>
     <div class="container">
         <!-- <div class="sticky-container"> -->
 
-            <div class="dashboard-container">
-                <div class="budget-value dashboard-box">
-                    <p>Budget</p>
-                    <p id="budget-amount">00</p>
-                </div>
-                <div class="expense-value dashboard-box">
-                    <p>Expense</p>
-                    <p id="expense-amount">00</p>
-                </div>
-                <div class="balance-value dashboard-box">
-                    <p>Balance</p>
-                    <p id="balance-amount">00</p>
-                </div>
+        <div class="dashboard-container">
+            <div class="budget-value dashboard-box">
+                <p class="m-0 dashboard-heading">Budget</p>
+                <p class="m-0 baloo-bhai" id="budget-amount"></p>
+            </div>
+            <div class="expense-value dashboard-box">
+                <p class="m-0 dashboard-heading">Expense</p>
+                <p class="m-0 baloo-bhai" id="expense-amount"></p>
+            </div>
+            <div class="balance-value dashboard-box">
+                <p class="m-0 dashboard-heading">Balance</p>
+                <p class="m-0 baloo-bhai" id="balance-amount"></p>
+            </div>
+        </div>
+
+        <div class="input-container">
+            <div class="budget-input input-box">
+                <label for="budget-value">Budget</label>
+                <input type="number" name="budget-value" id="budget-value" placeholder="Enter total amount">
+                <button class="btn budget-button" id="budget-button">Set Budget</button>
             </div>
 
-            <div class="input-container">
-                <div class="budget-input input-box">
-                    <label for="budget-value">Budget</label>
-                    <input type="number" name="budget-value" id="budget-value" placeholder="Enter total amount">
-                    <button class="btn" id="budget-button">Set Budget</button>
-                </div>
+            <div class="expense-input input-box" id="expense-input">
+                <p class="center warning-para baloo-bhai" id="warning">Please Enter all the Values!</p>
+                <div class="inputs-aside">
+                    <!-- <p>Please Enter all Values</p> -->
+                    <div class="firstset set">
+                        <label for="category">Category</label>
+                        <Select name="category" id="expense-category-value">
+                            <option value="" disabled selected hidden>Select expense category</option>
+                        </Select>
+                        <!-- <input type="text" name="category" id="expense-category-value"
+                            placeholder="Enter expense category"> -->
 
-                <div class="expense-input input-box">
-                    <div class="inputs-aside">
-                        <div class="firstset">
-                            <label for="category">Category</label>
-                            <input type="text" name="category" id="expense-category-value"
-                                placeholder="Enter expense category">
-
-                            <label for="description">Description</label>
-                            <input type="text" name="description" id="expense-description-value"
-                                placeholder="Enter description">
-                        </div>
-                        <div class="secondset">
-                            <label for="amount">Amount</label>
-                            <input type="number" name="amount" id="expense-amount-value" placeholder="Enter amount">
-
-                            <label for="date">Date</label>
-                            <input type="date" name="date" id="expense-date-value">
-                        </div>
+                        <label for="description">Description</label>
+                        <input type="text" name="description" id="expense-description-value"
+                            placeholder="Enter description">
                     </div>
-                    <button class="btn" id="expense-button">Set Expense</button>
+                    <div class="secondset set">
+                        <label for="amount">Amount</label>
+                        <input type="number" name="amount" id="expense-amount-value" placeholder="Enter amount">
+
+                        <label for="date">Date</label>
+                        <input type="date" name="date" id="expense-date-value">
+                    </div>
                 </div>
+                <button class="btn expense-button" id="expense-button">Set Expense</button>
             </div>
+        </div>
         <!-- </div> -->
         <div class="expense-table" id="expense-table">
+            <!-- <div class="table-details">
+                <div class="today"></div>
+                <div class="expense-details">
+                    <div class="transaction"></div>
+                    <div class="expense-values"></div>
+                </div> -->
             <table class="table ">
                 <thead id="table-thead">
                     <!-- <tr>
@@ -104,6 +117,8 @@
                 </tbody>
             </table>
         </div>
+
+    </div>
     </div>
 </body>
 
