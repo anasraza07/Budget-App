@@ -6,119 +6,135 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Budget App</title>
-    <link rel="stylesheet" href="./CSS/style.css">
-    <link rel="stylesheet" href="./CSS/utilities.css">
-    <link rel="stylesheet" href="./CSS/phone.css">
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/utilities.css">
+    <link rel="stylesheet" href="./styles/phone.css">
     <script defer src="app.js"></script>
 </head>
 
 <body>
-    <h1 class="m-2 baloo-bhai">Budget App</h1>
     <div class="container">
-        <!-- <div class="sticky-container"> -->
-
         <div class="dashboard-container">
-            <div class="budget-value dashboard-box">
+            <div class="dashboard-box">
                 <p class="m-0 dashboard-heading">Budget</p>
-                <p class="m-0 baloo-bhai" id="budget-amount"></p>
+                <p class="m-0 baloo-bhai" id="total-budget">00</p>
             </div>
             <div class="expense-value dashboard-box">
                 <p class="m-0 dashboard-heading">Expense</p>
-                <p class="m-0 baloo-bhai" id="expense-amount"></p>
+                <p class="m-0 baloo-bhai" id="total-amount">00</p>
             </div>
             <div class="balance-value dashboard-box">
                 <p class="m-0 dashboard-heading">Balance</p>
-                <p class="m-0 baloo-bhai" id="balance-amount"></p>
+                <p class="m-0 baloo-bhai" id="total-balance">00</p>
             </div>
         </div>
 
-        <div class="input-container">
+        <div class="inputs-container">
             <div class="budget-input input-box">
-                <label for="budget-value">Budget</label>
-                <input type="number" name="budget-value" id="budget-value" placeholder="Enter total amount">
-                <button class="btn budget-button" id="budget-button">Set Budget</button>
+                <label for="budget-amount">Budget</label>
+                <form class="budget-form">
+                    <input type="number" name="budget-value" id="budget-value" placeholder="Enter total amount"
+                        required>
+                    <button class="btn budget-button" id="budget-button">
+                        Set Budget</button>
+                </form>
             </div>
 
-            <div class="expense-input input-box" id="expense-input">
+            <div class="input-box" id="expense-form">
                 <p class="center warning-para baloo-bhai" id="warning">Please Enter all the Values!</p>
-                <div class="inputs-aside">
-                    <!-- <p>Please Enter all Values</p> -->
-                    <div class="firstset set">
-                        <label for="category">Category</label>
-                        <Select name="category" id="expense-category-value">
-                            <option value="" disabled selected hidden>Select expense category</option>
+                <div class="expense-inputs">
+                    <label for="select-category">Category
+                        <Select name="category" id="select-category" required>
+                            <option value="" disabled selected>Select expense category</option>
                         </Select>
-                        <!-- <input type="text" name="category" id="expense-category-value"
-                            placeholder="Enter expense category"> -->
+                    </label>
 
-                        <label for="description">Description</label>
+                    <label for="description-input">Description
                         <input type="text" name="description" id="expense-description-value"
-                            placeholder="Enter description">
-                    </div>
-                    <div class="secondset set">
-                        <label for="amount">Amount</label>
-                        <input type="number" name="amount" id="expense-amount-value" placeholder="Enter amount">
+                            placeholder="Enter description" required>
+                    </label>
 
-                        <label for="date">Date</label>
+                    <label for="amount">Amount
+                        <input type="number" name="amount" id="expense-amount-value" placeholder="Enter amount"
+                            required>
+                    </label>
+
+                    <label for="date">Date
                         <input type="date" name="date" id="expense-date-value">
-                    </div>
+                    </label>
                 </div>
-                <button class="btn expense-button" id="expense-button">Set Expense</button>
+                <button class="btn expense-button" id="expense-button">
+                    Set Expense
+                </button>
             </div>
         </div>
-        <!-- </div> -->
+
         <div class="expense-table" id="expense-table">
-            <!-- <div class="table-details">
+            <div class="table-details">
                 <div class="today"></div>
                 <div class="expense-details">
                     <div class="transaction"></div>
                     <div class="expense-values"></div>
-                </div> -->
-            <table class="table ">
-                <thead id="table-thead">
-                    <!-- <tr>
-                        <th>S.no.</th>
-                        <th class="firstData">Category/Description</th>
-                        <th>Amount</th>
-                        <th>Buttons</th>
-                    </tr> -->
-                </thead>
-                <tbody id="table-tbody">
-                    <!-- <tr>
-                        <td id="firstData">
-                            <div>Resturnat</div>
-                            <p>20 August 2022</p>
-                        </td>
-                        <td>1000</td>
-                        <td><button class="edit btn">Edit</button>
-                            <button class="delete btn">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div>Resturnat</div>
-                            <p>20 August 2022</p>
-                        </td>
-                        <td>1000</td>
-                        <td><button class="edit">Edit</button>
-                            <button class="delete">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div>Resturnat</div>
-                            <p>20 August 2022</p>
-                        </td>
-                        <td>1000</td>
-                        <td><button class="edit">Edit</button>
-                            <button class="delete">Delete</button>
-                        </td>
-                    </tr> -->
-                </tbody>
-            </table>
-        </div>
+                </div>
+                <table class="table ">
+                    <thead id="table-thead">
+                        <!-- <tr>
+                            <th>S.no.</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Buttons</th>
+                        </tr> -->
+                    </thead>
+                    <tbody id="table-tbody">
+                        <!-- <tr>
+                            <td>1.</td>
+                            <td>housing</td>
+                            <td id="firstData">
+                                <div>Resturant</div>
+                                <p id="date">20 August 2022</p>
+                            </td>
+                            <td>$1000</td>
+                            <td>
+                                <img src="./img/edit.png" class="actionsImg" id="edit">
+                                <img src="./img/delete.png" class="actionsImg" id="delete">
+                            </td>
+                        </tr>
 
-    </div>
+                        <tr>
+                            <td>2.</td>
+                            <td>housing</td>
+
+                            <td>
+                                <div>Resturant</div>
+                                <p id="date">20 August 2022</p>
+                            </td>
+                            <td>$1000</td>
+                            <td>
+                                <img src="./img/edit.png" class="actionsImg" id="edit">
+                                <img src="./img/delete.png" class="actionsImg" id="delete">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>3.</td>
+                            <td>housing</td>
+                            <td>
+                                <div>Resturant</div>
+                                <p id="date">20 August 2022</p>
+                            </td>
+                            <td>$1000</td>
+                            <td>
+                                <img src="./img/edit.png" class="actionsImg" id="edit">
+
+                                <img src="./img/delete.png" class="actionsImg" id="delete">
+                            </td>
+                        </tr> -->
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
     </div>
 </body>
 
