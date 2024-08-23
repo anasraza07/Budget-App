@@ -96,7 +96,7 @@ function amountCustomValidation(caller, currentAmount = 0) {
                 expenseAmount.setCustomValidity('Your balance is zero. Set a new budget first!')
             }
             else if (expenseAmount.value > totalBalance) {
-                console.log(expenseAmount.value)
+                // console.log(expenseAmount.value)
                 expenseAmount.setCustomValidity('Amount must be less than your balance')
             } else {
                 expenseAmount.setCustomValidity('');
