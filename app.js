@@ -53,6 +53,7 @@ if (totalBalance === 0) budgetAmount.focus();
 else expenseDescription.focus();
 
 const budgetForm = document.querySelector(".budget-form");
+amountCustomValidation('setExpense');
 budgetForm.addEventListener("submit", (e) => {
     setBudget(e);
     expenseDescription.focus();
@@ -72,9 +73,7 @@ function setBudget(e) {
 };
 
 // expense amount input custom validation
-amountCustomValidation('setExpense');
 function amountCustomValidation(caller, currentAmount = 0) {
-    // console.log(currentAmount)
     if (caller === 'editExpense') {
         expenseAmount.addEventListener('input', () => {
             if (expenseAmount.value === '') {
@@ -87,24 +86,24 @@ function amountCustomValidation(caller, currentAmount = 0) {
             } else {
                 expenseAmount.setCustomValidity('');
             }
-
             expenseAmount.reportValidity();
         });
-        return;
+    } else {
+        expenseAmount.addEventListener('input', () => {
+            if (expenseAmount.value === '') {
+                expenseAmount.setCustomValidity('Set the expense amount')
+            } else if (totalBalance === 0) {
+                expenseAmount.setCustomValidity('Your balance is zero. Set a new budget first!')
+            }
+            else if (expenseAmount.value > totalBalance) {
+                console.log(expenseAmount.value)
+                expenseAmount.setCustomValidity('Amount must be less than your balance')
+            } else {
+                expenseAmount.setCustomValidity('');
+            }
+            expenseAmount.reportValidity();
+        });
     }
-
-    expenseAmount.addEventListener('input', () => {
-        if (expenseAmount.value === '') {
-            expenseAmount.setCustomValidity('Set the expense amount')
-        } else if (totalBalance === 0) {
-            expenseAmount.setCustomValidity('Your balance is zero. Set a new budget first!')
-        }
-        else if (expenseAmount.value > totalBalance) {
-            expenseAmount.setCustomValidity('Amount must be less than your balance')
-        } else {
-            expenseAmount.setCustomValidity('');
-        }
-    });
 };
 
 const expenseForm = document.querySelector('.expense-inputs');
@@ -249,6 +248,7 @@ function saveExpense(event, currentObject, handleSaveExpense) {
 
     expenseForm.removeEventListener("submit", handleSaveExpense);
     expenseForm.addEventListener("submit", setExpense);
+    amountCustomValidation('setExpense');
 }
 
 function formatDate(date) {
