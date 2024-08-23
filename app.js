@@ -1,24 +1,16 @@
-// Step 01
-const budgetDashboard = document.getElementById("total-budget");
-const expenseDashboard = document.getElementById("total-expense");
-const balanceDashboard = document.getElementById("total-balance");
-
-const budgetValue = document.getElementById("budget-value");
-const budgetForm = document.querySelector(".budget-form");
-
 const expenseCategory = document.getElementById("select-category");
 const expenseDescription = document.getElementById("expense-description-value");
 const expenseAmount = document.getElementById("expense-amount-value");
 const expenseDate = document.getElementById("expense-date-value");
 
 const expenseBtn = document.getElementById("expense-button");
+const saveBtn = document.getElementById("save-button");
 
-// const table = document.getElementById("expense-table");
 const thead = document.getElementById("table-thead");
 const tbody = document.getElementById("table-tbody");
 
-// // const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-// const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+const expenseList = JSON.parse(localStorage.getItem('expense-list')) || [];
+
 const categories = ["Housing", "Transportation", "Food", "Utilities", "Insurance", "Medical", "Saving", "Personal", "Entertainment", "Other"]
 categories.forEach(category => {
     const option = document.createElement("option");
@@ -26,78 +18,105 @@ categories.forEach(category => {
     expenseCategory.appendChild(option);
 })
 
-const expenseList = JSON.parse(localStorage.getItem('expense-list')) || [];
-// let totalExpense = 0;
-// budgetDashboard.innerText = "00";
-// expenseDashboard.innerText = "00";
-// balanceDashboard.innerText = "00";
+// dashboard set
+const totalBudgetElem = document.getElementById("total-budget");
+const totalExpenseElem = document.getElementById("total-expense");
+const totalBalanceElem = document.getElementById("total-balance");
 
-function updateLocalStorage() {
-    localStorage.setItem('expense-list', JSON.stringify(expenseList));
+let totalBudget = JSON.parse(localStorage.getItem("total-budget")) || 0;
+totalBudgetElem.innerText = String(totalBudget).padStart(2, 0);
+
+let totalExpense = 0;
+updateDashboardExpense();
+
+let totalBalance = 0;
+updateDashboardBalance();
+
+function updateDashboardExpense() {
+    totalExpense = 0;
+    expenseList.forEach(expenseObj => {
+        totalExpense += expenseObj.amountQuery;
+    });
+
+    totalExpenseElem.innerText = String(totalExpense).padStart(2, 0);
 };
 
-// Budget Dashboard
+function updateDashboardBalance() {
+    totalBalance = totalBudget - totalExpense;
+    totalBalanceElem.innerText = String(totalBalance).padStart(2, 0);
+};
+
+// budget form
+const budgetAmount = document.getElementById("budget-amount");
+
+if (totalBalance === 0) budgetAmount.focus();
+else expenseDescription.focus();
+
+const budgetForm = document.querySelector(".budget-form");
 budgetForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    if (budgetValue.value === "") {
-        budgetDashboard.innerText = "00";
-    }
-    else {
-        budgetDashboard.innerText = budgetValue.value;
-        budgetValue.value = "";
-    }
-    // showBalance();
+    setBudget(e);
+    expenseDescription.focus();
 });
 
-// // Expense Dashboard
-// const showExpense = () => {
-//     let sum = 0;
-//     expenseList.forEach((obj) => {
-//         sum += obj.amountQuery;
-//     })
-//     if (sum === 0) {
-//         expenseDashboard.innerText = "00";
-//     }
-//     else {
-//         expenseDashboard.innerText = `${sum} `
-//     }
-//     showBalance();
-// }
+function setBudget(e) {
+    e.preventDefault();
 
-// // Balance Dashboard
-// const showBalance = () => {
-//     // let balance = 0;
-//     if (budgetDashboard.innerText === "00" && expenseDashboard.innerText === "00") {
-//         balanceDashboard.innerText = budgetDashboard.innerText;
-//     }
-//     else {
-//         balanceDashboard.innerText = budgetDashboard.innerText - expenseDashboard.innerText;
-//     }
-// }
+    totalBudget = Number(budgetAmount.value);
+    totalBudgetElem.innerText = String(totalBudget).padStart(2, 0);
 
-// Taking input from user
-expenseBtn.addEventListener("click", () => {
+    localStorage.setItem('total-budget', JSON.stringify(totalBudget));
+
+    budgetForm.reset();
+
+    updateDashboardBalance();
+};
+
+// expense amount input custom validation
+amountCustomValidation('setExpense');
+function amountCustomValidation(caller, currentAmount = 0) {
+    // console.log(currentAmount)
+    if (caller === 'editExpense') {
+        expenseAmount.addEventListener('input', () => {
+            if (expenseAmount.value === '') {
+                expenseAmount.setCustomValidity('Set the expense amount')
+            } else if (totalBalance + currentAmount === 0) {
+                expenseAmount.setCustomValidity('Your balance is zero. Set a new budget first!')
+            }
+            else if (expenseAmount.value > (totalBalance + Number(currentAmount))) {
+                expenseAmount.setCustomValidity('Amount must be less than your balance')
+            } else {
+                expenseAmount.setCustomValidity('');
+            }
+
+            expenseAmount.reportValidity();
+        });
+        return;
+    }
+
+    expenseAmount.addEventListener('input', () => {
+        if (expenseAmount.value === '') {
+            expenseAmount.setCustomValidity('Set the expense amount')
+        } else if (totalBalance === 0) {
+            expenseAmount.setCustomValidity('Your balance is zero. Set a new budget first!')
+        }
+        else if (expenseAmount.value > totalBalance) {
+            expenseAmount.setCustomValidity('Amount must be less than your balance')
+        } else {
+            expenseAmount.setCustomValidity('');
+        }
+    });
+};
+
+const expenseForm = document.querySelector('.expense-inputs');
+expenseForm.addEventListener("submit", setExpense);
+
+function setExpense(e) {
+    e.preventDefault();
+
     const categoryQuery = expenseCategory.value;
     const descriptionQuery = expenseDescription.value;
     const amountQuery = Number(expenseAmount.value);
-    let dateQuery = expenseDate.value;
-    dateQuery = new Date(dateQuery).toDateString().slice(4);
-
-    // console.log(categoryQuery, descriptionQuery, amountQuery, dateQuery);
-
-    // const yearOnly = new Date(`"${longDateQuery}"`).getFullYear();
-    // const monthOnly = months[new Date(`"${longDateQuery}"`).getMonth()];
-    // let dateOnly = new Date(`"${longDateQuery}"`).getDate();
-    // dateOnly < 10 ? dateOnly = "0" + dateOnly : dateOnly;
-
-    if (categoryQuery === "" || descriptionQuery === "" || amountQuery === "" || dateQuery === "") {
-        const warningElem = document.getElementById("warning");
-        warningElem.style.visibility = "visible";
-        setTimeout(() => {
-            warningElem.style.visibility = "hidden";
-        }, 3000)
-        return;
-    }
+    const dateQuery = new Date(expenseDate.value).toDateString().slice(4);
 
     let expenseObj = {
         categoryQuery,
@@ -105,101 +124,132 @@ expenseBtn.addEventListener("click", () => {
         amountQuery,
         dateQuery,
     };
-    expenseList.push(expenseObj);
-    updateLocalStorage();
 
+    expenseList.unshift(expenseObj);
+    localStorage.setItem('expense-list', JSON.stringify(expenseList));
+    expenseForm.reset();
     displayExpenseTable();
-    // showExpense();
+    refreshDashboard();
+}
 
-    expenseCategory.value = "";
-    expenseDescription.value = "";
-    expenseAmount.value = "";
-    expenseDate.value = "";
-});
+function refreshDashboard() {
+    updateDashboardExpense();
+    updateDashboardBalance();
+};
 
-// Displaying expenses
+// display table of all expense
+displayExpenseTable();
 function displayExpenseTable() {
-    thead.innerHTML = `
+    if (!expenseList.length) {
+        thead.innerHTML = "";
+    } else {
+        thead.innerHTML = `
         <tr>
             <th>S.no.</th>
-            <th>Category</th>
             <th>Description</th>
-            <th>Amount</th>
-            <th>Buttons</th>
+            <th>Category</th>
+            <th id="amount">Amount</th>
+            <th id="actions">Actions</th>
         </tr>`;
-
-    if (expenseList.length === 0) {
-        thead.innerHTML = "";
-    };
+    }
 
     let tbodyHtml = '';
     expenseList.forEach((expenseObj, index) => {
         tbodyHtml += `
             <tr>
                 <td>${index + 1}.</td>
-                <td>${expenseObj.categoryQuery}</td>
-                <td id="firstData">
+                <td id="first-data">
                     <div>${expenseObj.descriptionQuery}</div>
                     <p>${expenseObj.dateQuery}</p>
                 </td>
-                <td>$${expenseObj.amountQuery}</td>
-                <td>
+                <td>${expenseObj.categoryQuery}</td>
+                <td id="amount">$${expenseObj.amountQuery}.00</td>
+                <td id="actions">
                     <img src="./img/edit.png" id="edit" class="actionsImg" data-expense-id="${index}">
                     <img src="./img/delete.png" id="delete" class="actionsImg" data-expense-id="${index}">
                 </td>
             </tr>`;
-    })
+    });
     tbody.innerHTML = tbodyHtml;
 
-    //     // Edit And Delete Functionality
-    document.querySelectorAll("#edit").forEach((editBtn) => {
+    // edit expense
+    document.querySelectorAll("#edit").forEach(editBtn => {
         editBtn.addEventListener('click', () => {
             const { expenseId } = editBtn.dataset;
-            const currentObject = expenseList[expenseId];
-            const { categoryQuery,
-                descriptionQuery, amountQuery, dateQuery } = currentObject;
+            editExpense(expenseId);
+            document.querySelector('.scroll-view-control').scrollIntoView();
+        });
+    });
 
-            // let storedCategory = event.target.parentNode.previousElementSibling.previousElementSibling.previousElementSibling.innerText;
-            // let storedDescription = event.target.parentNode.previousElementSibling.previousElementSibling.firstChild.nextSibling.innerText;
-            // let storedAmount = event.target.parentNode.previousElementSibling.innerText
-            // storedAmount = storedAmount.slice(1)
-            // storedDate = event.target.parentNode.previousElementSibling.previousElementSibling.firstChild.nextSibling.nextSibling.nextSibling.innerText;
-
-            // let indexOfCurrObj = event.target.parentNode.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.innerText - 1
-
-            expenseCategory.value = categoryQuery;
-            expenseDescription.value = descriptionQuery;
-            expenseAmount.value = amountQuery;
-            expenseDate.value = formatDate(new Date(dateQuery));
-            // expenseBtn.innerText = "SAVE";
-            // expenseBtn.style.backgroundColor = "#fff";
-            // expenseBtn.style.color = "#1c3e7d";
-            // expenseBtn.style.border = "2px solid #1c3e7d";
-            // expenseBtn
-            // event.target.parentNode.parentNode.remove()
-            // expenseList.splice(expenseId, 1);
-            // const expenseInput = document.getElementById("expense-input");
-            // expenseInput.scrollIntoView()
-            displayExpenseTable()
-            // showExpense()
-            // if (expenseList.length === 0) {
-            //     thead.innerHTML = "";
-            // }
-        })
-    })
-
+    // delete expense
     document.querySelectorAll("#delete").forEach(deleteBtn => {
         deleteBtn.addEventListener('click', () => {
             const { expenseId } = deleteBtn.dataset;
-            expenseList.splice(expenseId, 1);
-            updateLocalStorage();
-            displayExpenseTable();
+            deleteExpense(expenseId);
+        });
+    });
+};
 
-            // showExpense();
-        })
-    })
+function deleteExpense(expenseId) {
+    expenseList.splice(expenseId, 1);
+    localStorage.setItem('expense-list', JSON.stringify(expenseList));
+    refreshDashboard();
+    displayExpenseTable();
 }
-displayExpenseTable();
+
+let globalExpenseId;
+function editExpense(expenseId) {
+    globalExpenseId = expenseId;
+    const currentObject = expenseList[expenseId];
+    const { categoryQuery, descriptionQuery, amountQuery, dateQuery } = currentObject;
+
+    expenseCategory.value = categoryQuery;
+    expenseDescription.value = descriptionQuery;
+    expenseAmount.value = amountQuery;
+    expenseDate.value = formatDate(new Date(dateQuery));
+
+    amountCustomValidation('editExpense', amountQuery);
+
+    expenseBtn.style.display = "none";
+    saveBtn.style.display = "block"
+    saveBtn.setAttribute("type", "submit");
+    expenseDescription.focus();
+
+    expenseForm.removeEventListener("submit", setExpense);
+
+    expenseForm.removeEventListener("submit", handleSaveExpense);
+    // console.log('handleSaveExpense removed')
+
+    expenseForm.addEventListener('submit', handleSaveExpense);
+    // console.log("handleSaveExpense attached");
+};
+
+function handleSaveExpense(event) {
+    const currentObject = expenseList[globalExpenseId];
+    saveExpense(event, currentObject, handleSaveExpense)
+};
+
+function saveExpense(event, currentObject, handleSaveExpense) {
+    event.preventDefault();
+    currentObject.categoryQuery = expenseCategory.value;
+    currentObject.descriptionQuery = expenseDescription.value;
+    currentObject.amountQuery = Number(expenseAmount.value);
+    currentObject.dateQuery = expenseDate.value;
+
+    localStorage.setItem('expense-list', JSON.stringify(expenseList));
+
+    displayExpenseTable();
+    refreshDashboard();
+
+    saveBtn.style.display = "none"
+    expenseBtn.style.display = "block";
+    saveBtn.setAttribute("type", "button");
+
+    expenseForm.reset();
+
+    expenseForm.removeEventListener("submit", handleSaveExpense);
+    expenseForm.addEventListener("submit", setExpense);
+}
 
 function formatDate(date) {
     const year = date.getFullYear();
@@ -208,25 +258,3 @@ function formatDate(date) {
 
     return `${year}-${month}-${day}`;
 }
-
-// // // Extra work after to be done:
-// // const tableDetails = () => {
-// //     const today = new Date();
-// //     const month = months[today.getMonth()]
-// //     let date = today.getDate()
-// //     date < 10 ? date = "0" + date : date;
-// //     const year = today.getFullYear()
-// //     // console.log(month, date, year)
-
-// //     const div = document.createElement("div");
-// //     div.classList.add("table-details");
-// //     div.innerHTML = `
-// //         <div class="today">${month} ${date} ${year}</div>
-// //         <div class="expense-details">
-// //             <div class="transaction">Number of transactions: 04</div>
-// //             <div class="expense-values">Values: 1234</div>
-// //         </div>
-// //     `
-// // table.appendChild(div);
-// // }
-// // tableDetails()

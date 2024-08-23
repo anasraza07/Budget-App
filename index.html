@@ -14,18 +14,19 @@
 
 <body>
     <div class="container">
+        <div class="scroll-view-control">
         <div class="dashboard-container">
             <div class="dashboard-box">
                 <p class="m-0 dashboard-heading">Budget</p>
-                <p class="m-0 baloo-bhai" id="total-budget">00</p>
+                <p class="m-0 baloo-bhai" id="total-budget"></p>
             </div>
             <div class="expense-value dashboard-box">
                 <p class="m-0 dashboard-heading">Expense</p>
-                <p class="m-0 baloo-bhai" id="total-amount">00</p>
+                <p class="m-0 baloo-bhai" id="total-expense"></p>
             </div>
             <div class="balance-value dashboard-box">
                 <p class="m-0 dashboard-heading">Balance</p>
-                <p class="m-0 baloo-bhai" id="total-balance">00</p>
+                <p class="m-0 baloo-bhai" id="total-balance"></p>
             </div>
         </div>
 
@@ -33,7 +34,7 @@
             <div class="budget-input input-box">
                 <label for="budget-amount">Budget</label>
                 <form class="budget-form">
-                    <input type="number" name="budget-value" id="budget-value" placeholder="Enter total amount"
+                    <input type="number" name="budget-value" id="budget-amount" placeholder="Enter total amount"
                         required>
                     <button class="btn budget-button" id="budget-button">
                         Set Budget</button>
@@ -41,53 +42,45 @@
             </div>
 
             <div class="input-box" id="expense-form">
-                <p class="center warning-para baloo-bhai" id="warning">Please Enter all the Values!</p>
-                <div class="expense-inputs">
+                <form class="expense-inputs">
+                    <label for="description-input">Description
+                        <input type="text" name="description" id="expense-description-value"
+                            placeholder="Enter description" maxlength="18" required>
+                    </label>
                     <label for="select-category">Category
                         <Select name="category" id="select-category" required>
                             <option value="" disabled selected>Select expense category</option>
                         </Select>
                     </label>
-
-                    <label for="description-input">Description
-                        <input type="text" name="description" id="expense-description-value"
-                            placeholder="Enter description" required>
-                    </label>
-
                     <label for="amount">Amount
                         <input type="number" name="amount" id="expense-amount-value" placeholder="Enter amount"
                             required>
                     </label>
-
                     <label for="date">Date
-                        <input type="date" name="date" id="expense-date-value">
+                        <input type="date" name="date" id="expense-date-value" required>
                     </label>
-                </div>
-                <button class="btn expense-button" id="expense-button">
-                    Set Expense
-                </button>
+                    <button type="submit" class="btn expense-button" id="expense-button">
+                        Set Expense
+                    </button>
+                    <button type="button" id="save-button">Save</button>
+                </form>
             </div>
         </div>
+    </div>
 
         <div class="expense-table" id="expense-table">
-            <div class="table-details">
-                <div class="today"></div>
-                <div class="expense-details">
-                    <div class="transaction"></div>
-                    <div class="expense-values"></div>
-                </div>
-                <table class="table ">
-                    <thead id="table-thead">
-                        <!-- <tr>
+            <table class="table ">
+                <thead id="table-thead">
+                    <!-- <tr>
                             <th>S.no.</th>
                             <th>Category</th>
                             <th>Description</th>
                             <th>Amount</th>
                             <th>Buttons</th>
                         </tr> -->
-                    </thead>
-                    <tbody id="table-tbody">
-                        <!-- <tr>
+                </thead>
+                <tbody id="table-tbody">
+                    <!-- <tr>
                             <td>1.</td>
                             <td>housing</td>
                             <td id="firstData">
@@ -130,9 +123,8 @@
                                 <img src="./img/delete.png" class="actionsImg" id="delete">
                             </td>
                         </tr> -->
-                    </tbody>
-                </table>
-            </div>
+                </tbody>
+            </table>
 
         </div>
     </div>

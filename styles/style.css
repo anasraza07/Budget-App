@@ -4,18 +4,22 @@
 
 body {
   margin: 0;
+  padding-top: 86px;
 }
 
 .dashboard-container {
   background-color: #1c3e7d;
+  /* box-shadow: 0px 1px 6px #1c3e7d; */
   color: #fff;
   font-size: 1.5rem;
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  margin: 0 auto 12px;
   padding: 7px 0px;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .dashboard-box {
@@ -37,7 +41,7 @@ body {
 
 label {
   margin: 2px 0;
-  color: #1c3e7d;
+  color: #143b57;
   font-family: "Bree Serif", serif;
   font-size: 1.1rem;
 }
@@ -66,18 +70,24 @@ select,
   padding: 8px;
   font-size: 0.9rem;
   border-radius: 4px;
-  border: 1px solid #1c3e7d;
+  border: 1px solid #143b57;
   outline: none;
 }
 
-input:focus {
-  border: 2px solid #3168cd;
+select {
+  padding: 0 4px;
+}
+
+input:focus,
+select:focus {
+  border: 2px solid #143b57;
 }
 
 .input-box .btn {
-  background-color: #1c3e7d;
+  background-color: #143b57;
   color: #fff;
   border: none;
+  font-size: 1.1rem;
 }
 
 .budget-button {
@@ -85,7 +95,6 @@ input:focus {
   height: 35px;
   border-radius: 5px;
   font-family: "Bree Serif", serif;
-  font-size: 1.1rem;
   cursor: pointer;
   border: none;
 }
@@ -107,15 +116,28 @@ input:focus {
   width: 100%;
 }
 
-.expense-button {
+.expense-button,
+#save-button {
   width: 100%;
   margin: 15px auto;
   padding: 8px 0;
   border-radius: 4px;
   font-family: "Bree Serif", serif;
-  font-size: 1.1rem;
   cursor: pointer;
-  display: block;
+}
+
+#save-button {
+  background-color: #fff;
+  color: #143b57;
+  border: 2px solid #143b57;
+  display: none;
+  font-size: 1.1rem;
+  transition: background-color 0.2s;
+}
+
+#save-button:hover {
+  background-color: #143b57;
+  color: #fff;
 }
 
 .expense-table {
@@ -126,42 +148,48 @@ input:focus {
   width: 100%;
   border-collapse: collapse;
   margin: auto;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "IBM Plex Sans", sans-serif;
+  background-color: rgb(250, 250, 250);
 }
 
 tr {
-  /* border: 1px solid #75a5ff; */
-  /* border-bottom: 1px solid #8aaae5; */
+  border: 1px solid rgb(225, 225, 225);
 }
 
-tr:nth-child(even) {
-  /* background-color: #b0ccff; */
+tr{
+  background-color: rgba(42, 42, 125, 0.26);
 }
 
 th {
-  border: 1px solid rgb(146, 146, 146);
-  /* border-top: 1px solid #8aaae5;
-    border-bottom: 1px solid #8aaae5; */
+  border: 1px solid rgb(180, 180, 180);
   color: #fff;
-  background-color: #1c3e7d;
+  background-color: #2a2a7d;
   font-size: 1.1rem;
   text-align: left;
-  padding: 8px 5px;
+  padding: 8px 10px;
   vertical-align: middle;
 }
 
 td {
-  border: 1px solid rgb(210, 210, 210);
-  text-align: left;
-  padding: 8px 5px;
+  border: 1px solid rgb(225, 225, 225);
+  padding: 8px 10px;
   vertical-align: middle;
-  /* font-family: "IBM Plex Sans", sans-serif; */
   font-size: 1rem;
 }
 
-.firstData {
-  text-align: left;
-  padding-left: 3px;
+td p {
+  margin: 2px 0;
+  color: #2a2a7dca;
+  font-size: 0.9rem;
+}
+
+#first-data {
+  padding: 12px 10px;
+}
+
+#amount,
+#actions {
+  text-align: center;
 }
 
 td #date {
@@ -171,7 +199,7 @@ td #date {
 }
 
 .actionsImg {
-  width: 20px;
+  width: 25px;
   cursor: pointer;
   margin: 0 2px;
 }

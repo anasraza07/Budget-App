@@ -1,87 +1,76 @@
-@media screen and (max-width: 500px) {
-    .dashboard-container {
-        font-size: 1.1rem;
-        margin: 10px auto;
-        padding: 6px 0px;
+@media screen and (max-width: 530px) {
+  .dashboard-container {
+    font-size: 1.2rem;
+  }
 
-    }
+  .inputs-container {
+    margin: 30px 20px;
+  }
 
-    label {
-        margin: 4px 0
-    }
+  .input-box .btn {
+    font-size: 1rem;
+  }
 
-    .expense-input select,
-    input {
-        margin-bottom: 2px;
-    }
+  .expense-table {
+    margin: 34px 20px;
+  }
 
-    .input-box {
-        margin: 0;
-        padding: 2px;
-    }
+  th {
+    font-size: 0.9rem;
+  }
 
-    .input-container {
-        flex-wrap: wrap;
-    }
+  td {
+    font-size: 0.8rem;
+  }
 
-    .inputs-aside {
-        justify-content: center;
-    }
+  td p {
+    font-size: 0.7rem;
+  }
 
-    .expense-input {
-        margin: 15px 0;
-    }
+  .actionsImg {
+    width: 20px;
+  }
+}
 
-    .expense-table {
-        width: 100%;
-    }
+@media screen and (max-width: 430px) {
+  .dashboard-container {
+    font-size: 1.1rem;
+  }
 
-    .table {
-        font-size: .9rem;
-    }
+  .inputs-container {
+    margin: 30px 10px;
+  }
 
-    tr {
-        height: 20px;
-    }
+  .input-box .btn {
+    font-size: 0.9rem;
+  }
 
-    th {
-        font-size: .9rem;
-        text-align: center;
-        padding: 8px 5px;
-        vertical-align: middle;
+  .expense-table {
+    margin: 34px 10px;
+  }
 
-    }
+  th,
+  td {
+    padding: 2px 4px;
+  }
+  
+  th {
+    font-size: 0.8rem;
+  }
 
-    th,
-    td {
-        padding: 5px 0px;
-    }
+  td {
+    font-size: 0.7rem;
+  }
 
-    td {
-        height: 30px;
-        font-size: .8rem;
+  td p {
+    font-size: 0.6rem;
+  }
 
-    }
+  #first-data {
+    padding: 5px;
+  }
 
-    .btn {
-        font-size: 1rem;
-        /* margin: 0; */
-    }
-
-    th,
-    td {
-        padding: 5px 0px;
-    }
-
-    td #date {
-        font-size: .8rem;
-    }
-
-    .firstData {
-        padding: 8px 3px;
-    }
-
-    .actionsImg {
-        width: 15px;
-    }
+  .actionsImg {
+    width: 15px;
+  }
 }
